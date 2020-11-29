@@ -54,8 +54,9 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-        $user->role = $user->setRoleUser();
-        return $user->save() && $this->sendEmail($user);
+//        $user->role = $user->setRoleUser();
+//        return $user->save() && $this->sendEmail($user);  //отключаем верификацию по почте
+        return $user->save();
 
     }
 

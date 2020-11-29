@@ -10,5 +10,22 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'urlManagerFrontend' => [
+            'class' => 'yii\web\UrlManager',
+            'baseUrl' => 'http://frontend.test',
+            'hostInfo' => 'http://frontend.test',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
+        'urlManagerBackend' => [
+            'class' => 'yii\web\UrlManager',
+            'baseUrl' => 'http://backend.test',
+            'hostInfo' => 'http://backend.test',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
     ],
+    'name' => 'Chat application',
+
+
 ];
