@@ -9,9 +9,14 @@ $this->title = 'Чат на Yii2-фреймворк';
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
+
+    
+
+    $isAdmin = (Yii::$app->user->identity->username === 'admin') ? true : false;
+    
 ?>
 
-
+<div class="row">
 <div class="chat_window">
     <div class="top_menu">
         <div class="buttons">
@@ -23,27 +28,30 @@ use yii\bootstrap\ActiveForm;
     </div>
     <ul class="messages">
         <?php foreach ($list as $message):?>
-            <?php if(Yii::$app->user->identity->username === $message['author']) {?>
-                <li class="message right appeared">
+
+            <?php if(Yii::$app->user->identity->username === $message['author']) {
+                $class = "right";    
+            } else {
+                $class = 'left';
+            } ?>
+
+                <li class="message <?= $class ?> appeared">
+                    <div class="message-id" hidden><?= $message['id']; ?></div>
                     <div class="avatar"></div>
                     <div class="text_wrapper">
                         <div class="text">
                             <p><strong><?= $message['author'] ?></strong></p>
-                            <?= $message['text']; ?>
+                            <p><?= $message['text']; ?></p>
+                            <div class="message-timestamp"><?= date("Y-m-d H:i:s", $message['created_at']); ?></div>
+                            <?php if($isAdmin){ ?>
+                                <div class="message-admin_toolbar">
+                                    <span class='tool-hide'>Скрыть</span>
+                                </div>
+                            <?php }?>
+                            
                         </div>
                     </div>
                 </li>
-            <?php } else { ?>
-                <li class="message left appeared">
-                    <div class="avatar"></div>
-                    <div class="text_wrapper">
-                        <div class="text">
-                            <p><strong><?= $message['author'] ?></strong></p>
-                            <?= $message['text'] ?>
-                        </div>
-                    </div>
-                </li>
-            <?php } ?>
 
 
         <?php endforeach;?>
@@ -69,4 +77,5 @@ use yii\bootstrap\ActiveForm;
     <?php ActiveForm::end(); ?>
     
     </div>
+</div>
 </div>

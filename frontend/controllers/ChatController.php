@@ -33,4 +33,12 @@ class ChatController extends Controller
             'model' => $model,
         ]);
     }
+    
+    public function actionHide() {
+        
+        $id = Yii::$app->request->post('id');
+        $model = new Messages;
+        return $model->hide($id);
+
+    }
 }

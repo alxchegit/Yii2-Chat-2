@@ -213,17 +213,17 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-    public function getRole()
-    {
-        return $this->role;
-    }
+    // public function getRole()
+    // {
+    //     return $this->role;
+    // }
 
-    /**
-     * Set user role = 0
-     * @return integer
-     */
-    public function setRoleUser()
-    {
-        return self::ROLE_USER;
-    }
+    // /**
+    //  * Set user role = 0
+    //  * @return integer
+    //  */
+    // public function setRoleUser()
+    // {
+    //     return self::ROLE_USER;
+    // }
 }

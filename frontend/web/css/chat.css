@@ -8,17 +8,19 @@ body {
 }
 
 .chat_window {
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
     width: calc(100% - 20px);
+    margin: 0 auto;
     max-width: 800px;
-    /* height: 500px; */
-    min-height: 500px;
-    border-radius: 10px;
+    /* max-height: 700px; */
+    /* min-height: 500px; */
+    height: 700px;
     background-color: #fff;
-    left: 50%;
-    top: 51px;
-    bottom: 61px;
-    transform: translateX(-50%);
+    /* left: 50%; */
+    /* top: 51px; */
+    /* bottom: 61px; */
+    /* transform: translateX(-50%); */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     background-color: #f8f8f8;
     overflow: hidden;
@@ -142,6 +144,27 @@ body {
     font-size: 18px;
     font-weight: 300;
 }
+.text .message-timestamp {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: smaller;
+}
+
+.text .message-admin_toolbar {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: smaller;
+    
+}
+    .tool-hide {
+        cursor: pointer;
+        font-weight: 900;
+    }
+    .tool-hide:hover {
+        text-decoration: underline;
+    }
 
 .bottom_wrapper {
     position: relative;

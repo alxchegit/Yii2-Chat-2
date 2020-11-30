@@ -67,4 +67,11 @@ class Messages extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
+
+    public function hide($id) 
+    {   
+        $m = static::findOne(['id'=> $id]);
+        $m->status = self::STATUS_INACTIVE;
+        return $m->save();
+    }
 }
