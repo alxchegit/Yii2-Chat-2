@@ -75,9 +75,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $user = new User;
-        $role = $user->findByUserName('mmisha')->getRole();
-        return $this->renderContent($role);
+        
         return $this->render('index');
     }
 

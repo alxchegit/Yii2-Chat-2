@@ -37,7 +37,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Главная', 'url' => ['/site/index']],
-        ['label' => 'Чат', 'url' => Yii::$app->urlManagerFrontend->createUrl('site/index')],
+        ['label' => 'Чат', 'url' => Yii::$app->urlManagerFrontend->createUrl('chat/index')],
         ['label' => 'Users', 'url' => ['/users/index']],
     ];
     if (Yii::$app->user->isGuest) {

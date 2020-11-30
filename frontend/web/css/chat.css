@@ -11,12 +11,14 @@ body {
     position: absolute;
     width: calc(100% - 20px);
     max-width: 800px;
-    height: 700px;
+    /* height: 500px; */
+    min-height: 500px;
     border-radius: 10px;
     background-color: #fff;
     left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    top: 51px;
+    bottom: 61px;
+    transform: translateX(-50%);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     background-color: #f8f8f8;
     overflow: hidden;
@@ -60,8 +62,9 @@ body {
     list-style: none;
     padding: 20px 10px 0 10px;
     margin: 0;
-    height: 100%;
-    overflow: scroll;
+    min-height: 347px;
+    height: calc(100% - 173px);
+    overflow: auto;
 }
 .messages .message {
     clear: both;
@@ -148,7 +151,7 @@ body {
     position: absolute;
     bottom: 0;
 }
-.bottom_wrapper .message_input_wrapper {
+.bottom_wrapper .message_input_wrapper, .bottom_wrapper .field-chatform-text {
     display: inline-block;
     height: 50px;
     border-radius: 25px;
@@ -157,7 +160,7 @@ body {
     position: relative;
     padding: 0 20px;
 }
-.bottom_wrapper .message_input_wrapper .message_input {
+.bottom_wrapper .message_input_wrapper .message_input, .bottom_wrapper .field-chatform-text .message_input {
     border: none;
     height: 100%;
     box-sizing: border-box;
@@ -193,3 +196,8 @@ body {
 .message_template {
     display: none;
 }
+
+.help-block {
+    position: absolute;
+    bottom: -35px;
+} 

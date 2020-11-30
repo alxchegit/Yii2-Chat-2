@@ -1,7 +1,15 @@
 <?php
-    $this->title = 'Чат на Yii2-фреймворк';
 
-    ?>
+/* @var $this yii\web\View */
+/* @var $form yii\bootstrap\ActiveForm */
+/* @var $model \frontend\models\ChatForm */
+
+$this->title = 'Чат на Yii2-фреймворк';
+
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+
+?>
 
 
 <div class="chat_window">
@@ -41,11 +49,24 @@
         <?php endforeach;?>
     </ul>
     <div class="bottom_wrapper clearfix">
-        <div class="message_input_wrapper">
-            <input class="message_input" placeholder="Type your message here..." /></div>
-        <div class="send_message">
-            <div class="icon"></div>
-            <div class="text">Send</div>
-        </div>
+    <?php $form = ActiveForm::begin([
+        'id' => 'form-signup',
+        
+        ]); ?>
+ 
+    <?= $form->field($model, 'text')
+        ->textinput([
+            'autofocus' => true, 
+            'class'=>'message_input',
+            'placeholder' => 'Type your message here...'
+            ])
+        ->label(false) ?>  
+ 
+ 
+     
+        <?= Html::submitButton('Send', ['class' => 'send_message text', 'name' => 'send-message']) ?>
+     
+    <?php ActiveForm::end(); ?>
+    
     </div>
 </div>

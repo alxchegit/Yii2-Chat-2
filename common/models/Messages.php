@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+
 
 /**
  * This is the model class for table "messages".
@@ -16,6 +18,11 @@ use Yii;
  */
 class Messages extends \yii\db\ActiveRecord
 {
+
+    const STATUS_DELETED = 0;
+    const STATUS_INACTIVE = 9;
+    const STATUS_ACTIVE = 10;
+
     /**
      * {@inheritdoc}
      */
@@ -24,16 +31,25 @@ class Messages extends \yii\db\ActiveRecord
         return 'messages';
     }
 
+     /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['text', 'author', 'created_at', 'updated_at'], 'required'],
-            [['text'], 'string'],
-            [['created_at', 'updated_at', 'status'], 'integer'],
-            [['author'], 'string', 'max' => 255],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];
     }
 
@@ -44,8 +60,8 @@ class Messages extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'text' => 'Text',
-            'author' => 'Author',
+            'text' => 'Сообщение',
+            'author' => 'Автор',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'status' => 'Status',
