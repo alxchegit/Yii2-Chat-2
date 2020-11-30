@@ -3,16 +3,14 @@
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\ChatForm */
+/* @var $list  \yii\db\ActiveRecord */
 
-$this->title = 'Чат на Yii2-фреймворк';
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-
-    
-
-    $isAdmin = (Yii::$app->user->identity->username === 'admin') ? true : false;
+    $this->title = 'Чат на Yii2-фреймворк';
+    $isAdmin = Yii::$app->user->identity->username === 'admin';
     
 ?>
 
@@ -29,11 +27,22 @@ use yii\bootstrap\ActiveForm;
     <ul class="messages">
         <?php foreach ($list as $message):?>
 
-            <?php if(Yii::$app->user->identity->username === $message['author']) {
-                $class = "right";    
-            } else {
-                $class = 'left';
-            } ?>
+            <?php
+
+                if(!$isAdmin && $message['status'] != 10) {
+                    continue;
+                }
+                $class ='';
+                If($isAdmin && $message['status']<10) {
+                    $class .= ' admin_hidden ';
+                }
+                if(Yii::$app->user->identity->username === $message['author']) {
+                    $class .= "right";
+                } else {
+                    $class .= 'left';
+                }
+
+            ?>
 
                 <li class="message <?= $class ?> appeared">
                     <div class="message-id" hidden><?= $message['id']; ?></div>
@@ -45,14 +54,17 @@ use yii\bootstrap\ActiveForm;
                             <div class="message-timestamp"><?= date("Y-m-d H:i:s", $message['created_at']); ?></div>
                             <?php if($isAdmin){ ?>
                                 <div class="message-admin_toolbar">
-                                    <span class='tool-hide'>Скрыть</span>
+                                    <?php if($message['status']<10) :?>
+                                        <span class='tool-hide on'>Восстановить</span>
+                                    <?php endif; ?>
+                                    <?php if($message['status']==10) :?>
+                                        <span class='tool-hide off'>Скрыть</span>
+                                    <?php endif; ?>
                                 </div>
                             <?php }?>
-                            
                         </div>
                     </div>
                 </li>
-
 
         <?php endforeach;?>
     </ul>

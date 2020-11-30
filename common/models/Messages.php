@@ -2,9 +2,8 @@
 
 namespace common\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
-
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "messages".
@@ -16,7 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $updated_at
  * @property int $status
  */
-class Messages extends \yii\db\ActiveRecord
+class Messages extends ActiveRecord
 {
 
     const STATUS_DELETED = 0;
@@ -72,6 +71,13 @@ class Messages extends \yii\db\ActiveRecord
     {   
         $m = static::findOne(['id'=> $id]);
         $m->status = self::STATUS_INACTIVE;
+        return $m->save();
+    }
+
+    public function show($id)
+    {
+        $m = static::findOne(['id'=> $id]);
+        $m->status = self::STATUS_ACTIVE;
         return $m->save();
     }
 }
