@@ -55,12 +55,47 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['username', 'required'],
+            ['username', 'string', 'min'=>3, 'max'=>255],
+
+            ['password','required'],
+
             ['role', 'default', 'value' => self::ROLE_USER],
+            ['role', 'in', 'range' => [self::ROLE_USER, self::ROLE_ADMIN]],
+
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];
     }
 
+
+    public function attributeLabels()
+    {
+        return [
+            'password_hash' => 'Пароль',
+            'username' => 'Логин',
+            'status' => 'Статус',
+            'role' => 'Роль'
+
+        ];
+    }
+
+    public static function rangeRole()
+    {
+        return [
+            self::ROLE_USER,
+            self::ROLE_ADMIN
+        ];
+    }
+
+    public static function rangeStatus() 
+    {
+        return [           
+            self::STATUS_DELETED,
+            self::STATUS_INACTIVE,
+            self::STATUS_ACTIVE,
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -213,17 +248,17 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-    // public function getRole()
-    // {
-    //     return $this->role;
-    // }
+    public function getRole()
+    {
+        return $this->role;
+    }
 
-    // /**
-    //  * Set user role = 0
-    //  * @return integer
-    //  */
-    // public function setRoleUser()
-    // {
-    //     return self::ROLE_USER;
-    // }
+    /**
+     * Set user role = 0
+     * @return integer
+     */
+    public function setRoleUser()
+    {
+        return self::ROLE_USER;
+    }
 }

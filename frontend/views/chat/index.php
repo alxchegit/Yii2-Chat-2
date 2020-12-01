@@ -84,7 +84,7 @@ use yii\bootstrap\ActiveForm;
  
  
      
-        <?= Html::submitButton('Send', ['class' => 'send_message text', 'name' => 'send-message']) ?>
+        <?= Html::submitButton('Отправить', ['class' => 'send_message text', 'name' => 'send-message']) ?>
      
     <?php ActiveForm::end(); ?>
     

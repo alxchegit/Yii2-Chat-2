@@ -12,9 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'role')->textInput() ?>
+    <?= $form->field($model, 'username')->textInput() ?>
+    <?= $form->field($model, 'email')->textInput() ?>
+    <?= $form->field($model, 'password')->passwordInput() ?>
+    <?= $form->field($model, 'status')->dropDownList(['9'=>'Неактивный', '10'=> 'Активный']) ?>
+    <?= $form->field($model, 'role')->dropDownList(['0'=>'Пользователь', '1' => 'Админ']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

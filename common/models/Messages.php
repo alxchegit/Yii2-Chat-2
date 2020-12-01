@@ -47,6 +47,12 @@ class Messages extends ActiveRecord
     public function rules()
     {
         return [
+            ['text', 'string'],
+            ['text', 'required'],
+
+            ['author', 'string', 'max'=> 255],
+            ['author', 'required'],
+            
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];

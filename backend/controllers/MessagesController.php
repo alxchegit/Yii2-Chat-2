@@ -3,17 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\User;
-use backend\models\UserSearch;
-use backend\models\CreateUserForm;
+use common\models\Messages;
+use backend\models\MessagesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * MessagesController implements the CRUD actions for Messages model.
  */
-class UserController extends Controller
+class MessagesController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,13 +30,12 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all User models.
+     * Lists all Messages models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $this->isAllowed();
-        $searchModel = new UserSearch();
+        $searchModel = new MessagesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,33 +45,30 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Messages model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        $this->isAllowed();
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Messages model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $this->isAllowed();
+        $model = new Messages();
 
-        $model = new CreateUserForm(); 
-
-        if ($model->load(Yii::$app->request->post()) && $model->create()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        }  
+        }
 
         return $this->render('create', [
             'model' => $model,
@@ -81,7 +76,7 @@ class UserController extends Controller
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Messages model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -89,7 +84,6 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-        $this->isAllowed();
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -102,7 +96,7 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Messages model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,33 +104,24 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->isAllowed();
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Messages model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Messages the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Messages::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-
-    protected function isAllowed() 
-    {
-        if(Yii::$app->user->isGuest || Yii::$app->user->identity->username !== 'admin'){
-            return $this->goHome();
-        }
     }
 }

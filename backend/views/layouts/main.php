@@ -38,7 +38,8 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Главная', 'url' => ['/site/index']],
         ['label' => 'Чат', 'url' => Yii::$app->urlManagerFrontend->createUrl('chat/index')],
-        ['label' => 'Users', 'url' => ['/user/index']],
+        ['label' => 'Пользователи', 'url' => ['/user/index']],
+        ['label' => 'Сообщения', 'url' => ['/messages/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
