@@ -72,7 +72,7 @@ class UserController extends Controller
         $model = new CreateUserForm(); 
 
         if ($model->load(Yii::$app->request->post()) && $model->create()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->new_user_id]);
         }  
 
         return $this->render('create', [

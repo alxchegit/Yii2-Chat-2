@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'Пользователи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -26,17 +26,35 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'username',
            // 'auth_key',
-           'password_hash',
             //'password_reset_token',
             'email:email',
-            //'status',
-            'created_at',
-            'updated_at',
+            ['attribute' => 'created_at' , 'label'=>'Создание', 'format' => ['date', 'php:Y-m-d H:i:s']],
+            ['attribute' => 'updated_at' , 'label'=>'Изменение', 'format' => ['date', 'php:Y-m-d H:i:s']],
             //'verification_token',
-            'role',
+            ['attribute' => 'role', 'label'=> 'Роль', 
+                'value' => function($data){
+                    if($data->role == 1){
+                        $res = "1 (Админ)";
+                    }
+                    if($data->role == 0){
+                        $res = "0 (Пользователь)";
+                    }
+                    return $res;
+                }    
+            ],
+            ['attribute' => 'status', 'label'=> 'Статус', 
+                'value' => function($data){
+                    if($data->status == 10){
+                        $res = "10 (Активный)";
+                    }
+                    if($data->status == 9){
+                        $res = "9 (Неактивный)";
+                    }
+                    return $res;
+                }    
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

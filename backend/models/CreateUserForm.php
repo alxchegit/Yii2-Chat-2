@@ -16,6 +16,7 @@ class CreateUserForm extends Model
     public $status;
     public $role;
 
+    public $new_user_id;
 
     /**
      * {@inheritdoc}
@@ -57,13 +58,19 @@ class CreateUserForm extends Model
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
+        $user->status = $this->status;
+        $user->role = $this->role;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
 //        $user->role = $user->setRoleUser();
 //        return $user->save() && $this->sendEmail($user);  //отключаем верификацию по почте
-        return $user->save();
+        if($user->save()){
+            $this->new_user_id = $user->id;
+            return true; 
+        }
 
+        return null;
     }
  
 }

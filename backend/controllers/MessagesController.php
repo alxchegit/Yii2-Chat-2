@@ -35,6 +35,7 @@ class MessagesController extends Controller
      */
     public function actionIndex()
     {
+        $this->isAllowed();
         $searchModel = new MessagesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -64,6 +65,7 @@ class MessagesController extends Controller
      */
     public function actionCreate()
     {
+        $this->isAllowed();
         $model = new Messages();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -84,6 +86,7 @@ class MessagesController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->isAllowed();
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -104,6 +107,7 @@ class MessagesController extends Controller
      */
     public function actionDelete($id)
     {
+        $this->isAllowed();
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -123,5 +127,13 @@ class MessagesController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    
+    protected function isAllowed() 
+    {
+        if(Yii::$app->user->isGuest || Yii::$app->user->identity->username !== 'admin'){
+            return $this->goHome();
+        }
     }
 }

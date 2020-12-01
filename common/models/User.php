@@ -55,16 +55,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['username', 'required'],
-            ['username', 'string', 'min'=>3, 'max'=>255],
-
-            ['password','required'],
-
             ['role', 'default', 'value' => self::ROLE_USER],
-            ['role', 'in', 'range' => [self::ROLE_USER, self::ROLE_ADMIN]],
+            ['role', 'in', 'range' => self::rangeRole()],
 
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            ['status', 'in', 'range' => self::rangeStatus()],
         ];
     }
 
@@ -75,7 +70,8 @@ class User extends ActiveRecord implements IdentityInterface
             'password_hash' => 'Пароль',
             'username' => 'Логин',
             'status' => 'Статус',
-            'role' => 'Роль'
+            'role' => 'Роль',
+            'email' => 'E-mail',
 
         ];
     }

@@ -5,6 +5,7 @@ namespace frontend\controllers;
 
 
 use Yii;
+use yii\db\Query;
 use yii\web\Controller;
 use common\models\Messages;
 use frontend\models\ChatForm;
@@ -16,9 +17,15 @@ class ChatController extends Controller
     public function actionIndex ()
     {
 
-        $messages = new Messages();
+         
         $model = new ChatForm();
-        $list = $messages::findAll(['status' => [0,9,10]]);
+                
+        $query = "SELECT `messages`.`id`, `messages`.`text`, `messages`.`author`, `messages`.`created_at`, `messages`.`updated_at`, `messages`.`status` AS 'status', `user`.`email` as 'email', `user`.`role` as isAdmin 
+                FROM `messages` 
+                JOIN `user` ON `messages`.`author` = `user`.`username` 
+                WHERE `messages`.`status` >= 0";
+
+        $list = Yii::$app->db->createCommand($query)->queryAll();
 
         if($model->load(Yii::$app->request->post()) && $model->sendMessage()) {
              

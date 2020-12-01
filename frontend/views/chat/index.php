@@ -49,7 +49,7 @@ use yii\bootstrap\ActiveForm;
                     <div class="avatar"></div>
                     <div class="text_wrapper">
                         <div class="text">
-                            <p><strong><?= $message['author'] ?></strong></p>
+                            <p><strong><?= $message['author'] ?><?= ( $message['isAdmin'] ) ? " (АДМИН) ":"" ?></strong></p>
                             <p><?= $message['text']; ?></p>
                             <div class="message-timestamp"><?= date("Y-m-d H:i:s", $message['created_at']); ?></div>
                             <?php if($isAdmin){ ?>
@@ -78,7 +78,7 @@ use yii\bootstrap\ActiveForm;
         ->textinput([
             'autofocus' => true, 
             'class'=>'message_input',
-            'placeholder' => 'Type your message here...'
+            'placeholder' => 'Пиши сюда скорее...'
             ])
         ->label(false) ?>  
  
