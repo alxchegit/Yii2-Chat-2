@@ -44,3 +44,7 @@ composer update
 
 ### 5 Настроить web-сервер
 Инструкция на английском https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md
+
+### 6 Общая аутентификация для frantend или backend.
+
+https://klisl.com/yii2-aut-front-back.html

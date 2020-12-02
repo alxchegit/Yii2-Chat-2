@@ -43,10 +43,10 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } elseif (Yii::$app->user->identity->role) {
-        $menuItems[] = ['label' => 'Админка', 'url' => Yii::$app->urlManagerBackend->createUrl('site/index')];
-
     } else {
+        if (Yii::$app->user->identity->role) {
+            $menuItems[] = ['label' => 'Админка', 'url' => Yii::$app->urlManagerBackend->createUrl('site/index')];    
+        }
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

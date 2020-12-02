@@ -14,6 +14,7 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-chat-app',
+            'cookieValidationKey' => $params['cookieValidationKey'],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -23,6 +24,10 @@ return [
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'chat-app',
+            'cookieParams' =>[
+                'httpOnly' => true,
+                //'domain' => $params['cookieDomain'],
+            ]
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
