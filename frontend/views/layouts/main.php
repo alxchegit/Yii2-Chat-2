@@ -22,6 +22,7 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <meta name="google-site-verification" content="oBCi6AZeaf1kW3W9Jdsr-jMEOck_IQqtx0QreTj6-5A" />
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -73,7 +74,6 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
 

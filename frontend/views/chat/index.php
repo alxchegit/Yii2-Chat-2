@@ -10,8 +10,11 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
     $this->title = 'Чат на Yii2-фреймворк';
-    $isAdmin = Yii::$app->user->identity->username === 'admin';
-    
+    $isAdmin = false;
+    if(!Yii::$app->user->isGuest){
+        $isAdmin = Yii::$app->user->identity->username === 'admin';
+    }
+
 ?>
 
 <div class="row">
@@ -36,7 +39,7 @@ use yii\bootstrap\ActiveForm;
                 If($isAdmin && $message['status']<10) {
                     $class .= ' admin_hidden ';
                 }
-                if(Yii::$app->user->identity->username === $message['author']) {
+                if(!Yii::$app->user->isGuest && Yii::$app->user->identity->username === $message['author']) {
                     $class .= "right";
                 } else {
                     $class .= 'left';
