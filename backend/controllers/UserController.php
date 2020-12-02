@@ -133,9 +133,13 @@ class UserController extends Controller
     }
 
 
+    /**
+     * Check wheter user is allowed to execute this action
+     * @return mixed
+     */
     protected function isAllowed() 
     {
-        if(Yii::$app->user->isGuest || Yii::$app->user->identity->username !== 'admin'){
+        if(Yii::$app->user->isGuest || !Yii::$app->user->identity->role){
             return $this->goHome();
         }
     }
