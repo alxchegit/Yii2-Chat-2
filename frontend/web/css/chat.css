@@ -242,3 +242,23 @@ body {
     position: absolute;
     bottom: -35px;
 } 
+
+.admin-style .text_wrapper {
+    background-color: #79cc74!important;
+}
+.admin-style .text_wrapper .text {
+    color: #56432d!important;
+}
+
+.admin-style .admin_hidden.right .text_wrapper:after,
+.admin-style .admin_hidden.right .text_wrapper:before,
+.admin-style.right .text_wrapper:after,
+.admin-style.right .text_wrapper:before  {
+    border-left-color: #79cc74!important;
+}
+.admin-style .admin_hidden.left .text_wrapper:after,
+.admin-style .admin_hidden.left .text_wrapper:before,
+.admin-style.left .text_wrapper:after,
+.admin-style.left .text_wrapper:before {
+    border-right-color: #79cc74!important;
+}

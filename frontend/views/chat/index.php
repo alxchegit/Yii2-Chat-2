@@ -36,7 +36,10 @@ use yii\bootstrap\ActiveForm;
                     continue;
                 }
                 $class ='';
-                If($isAdmin && $message['status']<10) {
+                if($message['isAdmin']){
+                    $class .= " admin-style ";
+                }
+                if($isAdmin && $message['status']<10) {
                     $class .= ' admin_hidden ';
                 }
                 if(!Yii::$app->user->isGuest && Yii::$app->user->identity->username === $message['author']) {
